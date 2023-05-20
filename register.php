@@ -1,6 +1,26 @@
 <?php 
 
     require_once 'connect.php';
+    if(isset($_POST['submit'])){
+
+        $name = $_POST['name'];
+        $name = filter_var($name, FILTER_SANITIZE_STRING);
+        $email = $_POST['email'];
+        $email = filter_var($email, FILTER_SANITIZE_STRING);
+        $pass = sha1($_POST['pass']);
+        $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+        $cpass = sha1($_POST['cpass']);
+        $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
+        
+        $select_users = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
+        $select_users->execute([$email]);
+
+        if ($select_users->rowCount() > 0){
+            $message[] = 'email sudah di ambil!';
+        } else {
+            $message[] = 'Bekerja!';
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +40,19 @@
 </head>
 <body>
     
+    <?php 
+        if(isset($message)){
+            foreach($message as $message){
+                echo '
+                <div class="message">
+                    <span>'. $message .'</span>
+                    <i class="fas fa-times" onclick="this.parentElement.remove"></i>
+                </div>
+                ';
+            }
+        }
+    ?>
+
     <!-- register section start -->
 
     <section class="form-container">
@@ -28,8 +61,8 @@
             <h3>Daftar sekarang</h3>
             <input type="text" required maxlength="20" placeholder="Masukkan nama anda" class="box" name="name">
             <input type="email" required maxlength="50" placeholder="Masukkan email anda" class="box" name="email">
-            <input type="password" required maxlength="50" placeholder="Masukkan password anda" class="box" name="password">
-            <input type="password" required maxlength="50" placeholder="Confirmasi password anda" class="box" name="cpassword">
+            <input type="password" required maxlength="50" placeholder="Masukkan password anda" class="box" name="pass">
+            <input type="password" required maxlength="50" placeholder="Confirmasi password anda" class="box" name="cpass">
             <input type="submit" value="Daftar Sekarang" name="submit" class="btn">
             <p>Sudah memiliki akun? <a href="login.php">Login sekarang</a></p>
         </form>

@@ -6,7 +6,7 @@
   --light-bg:#eee;
   --black:#444;
   --white:#fff;
-  --box-shadow: 0 5px 10px rgba(0,0,0.5);
+  --box-shadow: 0 5px 10px rgba(0,0,0,.1);
   --border: 2px solid var(--black);
 }
 
@@ -26,6 +26,34 @@ html {
 
 body {
   background: var(--light-bg);
+}
+body .message {
+  position: sticky;
+  top: 15px;
+  border-radius: 5px;
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  margin: 0 auto;
+  max-width: 1200px;
+  animation: fadeIn 0.4s cubic-bezier(0.3, 1.41, 0.4, 1.46);
+}
+body .message span {
+  font-size: 20px;
+  color: var(--black);
+}
+body .message i {
+  color: var(--red);
+  font-size: 25px;
+  cursor: pointer;
+}
+body .message i:hover {
+  color: var(--black);
 }
 body section {
   padding: 20px;
