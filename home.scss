@@ -122,3 +122,8 @@ body {
         }
     }
 }
+@keyframes fadeIn {
+    0% {
+        transform: translateY(-10px) scale(.7);
+    }
+}

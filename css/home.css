@@ -126,4 +126,10 @@ body .form-container form .delete-btn {
 body .form-container form .btn:hover,
 body .form-container form .delete-btn:hover {
   background-color: var(--black);
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateY(-10px) scale(0.7);
+  }
 }/*# sourceMappingURL=home.css.map */
