@@ -104,8 +104,9 @@ body .form-container form .box {
   font-size: 20px;
   color: var(--black);
 }
-body .form-container form .btn,
-body .form-container form .delete-btn {
+
+.btn,
+.delete-btn {
   display: block;
   width: 100%;
   margin-top: 10px;
@@ -117,15 +118,47 @@ body .form-container form .delete-btn {
   cursor: pointer;
   text-transform: capitalize;
 }
-body .form-container form .btn {
+
+.btn {
   background-color: var(--green);
 }
-body .form-container form .delete-btn {
+
+.delete-btn {
   background-color: var(--red);
 }
-body .form-container form .btn:hover,
-body .form-container form .delete-btn:hover {
+
+.btn:hover,
+.delete-btn:hover {
   background-color: var(--black);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+.content .box {
+  width: 500px;
+  background-color: var(--white);
+  border-radius: 5px;
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  text-align: center;
+}
+.content .box h3 {
+  font-size: 25px;
+  color: var(--black);
+  margin-bottom: 10px;
+}
+.content .box h3 span {
+  color: var(--green);
+}
+.content .box .flex-btn {
+  display: flex;
+  gap: 10px;
 }
 
 @keyframes fadeIn {

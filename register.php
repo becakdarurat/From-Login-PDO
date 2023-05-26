@@ -14,11 +14,25 @@
         
         $select_users = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
         $select_users->execute([$email]);
-
         if ($select_users->rowCount() > 0){
             $message[] = 'email sudah di ambil!';
         } else {
-            $message[] = 'Bekerja!';
+            if($pass != $cpass){
+                $message[] = 'konfirmasi kata sandi tidak cocok!';
+            } else {
+                $insert_user = $conn->prepare("INSERT INTO `users`(name,email,password) VALUES (?,?,?)");
+                $insert_user->execute([$name,$email,$cpass]);
+                if($insert_user){
+                    $fetch_user = $conn->prepare("SELECT * FROM `users` WHERE email 
+                    = ? AND password = ?");
+                    $fetch_user->execute([$email,$cpass]);
+                    $row = $fetch_user->fetch(PDO::FETCH_ASSOC);
+                    if($fetch_user->rowCount() > 0){
+                        setcookie('user_id', $row['id'], time() + 60*60*24, '/');
+                        header('location: home.php');
+                    }
+                }
+            }
         }
     }
 
